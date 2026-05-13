@@ -37,20 +37,26 @@ namespace visualSORT
                 return;
 
             int n = array.Length;
-
-            for (int i = 0; i < n - 1; i++)
+            
+            // Сортировка Шелла
+            for (int gap = n / 2; gap > 0; gap /= 2)
             {
-                for (int j = 0; j < n - i - 1; j++)
+                for (int i = gap; i < n; i++)
                 {
-                    if (array[j].CompareTo(array[j + 1]) > 0)
+                    ISortable temp = array[i];
+                    int j;
+                    
+                    for (j = i; j >= gap && array[j - gap].CompareTo(temp) > 0; j -= gap)
                     {
-                        ISortable temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
-
+                        array[j] = array[j - gap];
+                        
                         Draw(canvas);
                         System.Threading.Thread.Sleep(25);
                     }
+                    
+                    array[j] = temp;
+                    Draw(canvas);
+                    System.Threading.Thread.Sleep(25);
                 }
             }
         }
