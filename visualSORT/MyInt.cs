@@ -20,13 +20,14 @@ namespace visualSORT
         {
             if (x is MyInt == false)
             {
-                throw new Exception("fif");
+                throw new Exception("Is not MyInt type");
             }
 
             MyInt xx = (MyInt)x;
             return value - xx.value;
         }
 
+        // преобразование строки в тип MyINt
         public static MyInt ToMyInt(string str)
         {
             int x = Int32.Parse(str);
